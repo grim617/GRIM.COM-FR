@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GRiM.COM — Music</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Audiowide&family=Space+Grotesk:wght@500;600&display=swap">
+<style>
+  /* Layout: one centered column of link buttons over the GRiM wallpaper, linktree style. */
+  :root {
+    --ink: #f7ecd2;
+    --ink-dim: #c9a3ff;
+    --panel: rgba(23, 10, 46, 0.82);
+    --panel-hover: rgba(60, 28, 112, 0.92);
+    --line: rgba(201, 163, 255, 0.4);
+    --line-hi: #c9a3ff;
+    --gold: #f5c518;
+    --font-display: 'Audiowide', 'Impact', sans-serif;
+    --font-body: 'Space Grotesk', Verdana, sans-serif;
+    color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    padding-inline: 16px;
+    padding-block: 56px 40px;
+    font-family: var(--font-body);
+    color: var(--ink);
+    background-color: #0a0610;
+    background-image: url('about/images/grim-wallpaper.png');
+    background-repeat: repeat;
+    background-attachment: fixed;
+  }
+  main { max-width: 440px; margin: 0 auto; display: flex; flex-direction: column; gap: 14px; }
+  h1 {
+    margin: 0 0 10px;
+    text-align: center;
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 26pt;
+    letter-spacing: 1px;
+    color: var(--gold);
+    text-shadow: 0 2px 18px rgba(0,0,0,0.8);
+  }
+  .link {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 12px 20px 12px 14px;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    color: var(--ink);
+    text-decoration: none;
+    font-family: var(--font-display);
+    font-size: 13pt;
+    letter-spacing: 0.5px;
+    backdrop-filter: blur(3px);
+    transition: transform .15s ease, border-color .15s ease, background .15s ease;
+  }
+  .link:hover, .link:focus-visible { background: var(--panel-hover); border-color: var(--line-hi); transform: translateY(-2px); outline: none; }
+  .link:focus-visible { box-shadow: 0 0 0 3px rgba(201,163,255,0.5); }
+  .icon {
+    flex: 0 0 auto;
+    width: 46px; height: 46px;
+    display: grid; place-items: center;
+    border-radius: 50%;
+    background: rgba(201,163,255,0.14);
+    border: 1px solid var(--line);
+  }
+  .icon svg { width: 24px; height: 24px; stroke: var(--ink-dim); fill: none; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+  .link:hover .icon svg { stroke: var(--gold); }
+  .home { margin-top: 10px; text-align: center; font-size: 11pt; }
+  .home a { color: var(--ink-dim); text-decoration: none; font-weight: 600; }
+  .home a:hover { text-decoration: underline; }
+  @media (prefers-reduced-motion: reduce) { .link { transition: none; } .link:hover { transform: none; } }
+</style>
+</head>
+<body>
+<main>
+  <h1>Music</h1>
+
+  <!-- To change a link, edit the href. To add a platform, copy one whole <a class="link"> block. -->
+  <a class="link" href="https://open.spotify.com/artist/4pYtEU5PeglXqdeRYm6C9N" target="_blank" rel="noopener">
+    <span class="icon"><svg viewBox="0 0 24 24"><path d="M4 14v-2a8 8 0 0 1 16 0v2"/><rect x="3" y="14" width="4" height="6" rx="1.5"/><rect x="17" y="14" width="4" height="6" rx="1.5"/></svg></span>
+    Spotify
+  </a>
+  <a class="link" href="https://music.apple.com/us/artist/grimsounds/1716490590" target="_blank" rel="noopener">
+    <span class="icon"><svg viewBox="0 0 24 24"><path d="M9 18V6l10-2v12"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="16" r="2.5"/></svg></span>
+    Apple Music
+  </a>
+  <a class="link" href="https://on.soundcloud.com/qKXQo7I8IQWoUmsRga" target="_blank" rel="noopener">
+    <span class="icon"><svg viewBox="0 0 24 24"><path d="M3 15v-3M6 17v-7M9 18V8M12 18V6M15 18V9M18 18v-5M21 15v-1"/></svg></span>
+    SoundCloud
+  </a>
+  <a class="link" href="https://www.youtube.com/channel/UCJL8jZDvEOa5yhwbnSLtYAw" target="_blank" rel="noopener">
+    <span class="icon"><svg viewBox="0 0 24 24"><rect x="2.5" y="5.5" width="19" height="13" rx="4"/><path d="M10 9.5v5l4.5-2.5z"/></svg></span>
+    YouTube
+  </a>
+
+  <p class="home"><a href="index.html">&larr; Back to GRiM.COM</a></p>
+</main>
+</body>
+</html>

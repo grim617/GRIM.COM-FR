@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>GRiM.COM — Book Reviews</title>
+    <link rel="icon" type="image/x-icon" href="https://i.postimg.cc/W1T47Y6M/plane1c.gif">
+
+    <link href="style.css" rel="stylesheet" type="text/css" media="all">
+  </head>
+  <body>
+
+<div class="container">
+
+<!--main box for the main content!-->
+<div class="bodymain full-width">
+<div class="os-window">
+
+  <div class="os-titlebar">
+    <div class="os-title">GRiM.COM — Book Reviews</div>
+    <div class="os-controls"><span>_</span><span>&#9633;</span><span>&times;</span></div>
+  </div>
+
+  <div class="os-menubar">
+    <a href="../index.html">GRiM.COM</a>
+    <a href="index.html">About Me</a>
+    <a href="index.html#goals">Goals</a>
+    <a href="blog.html">Blog</a>
+    <a href="https://4clear-2.myshopify.com/">Clothes</a>
+    <a href="books.html" class="active">Book Reviews</a>
+  </div>
+
+  <div class="os-body">
+<h1 class="page-heading">Book Reviews</h1>
+<p class="page-sub"> My takes on books in my library, click one that interests you. </p>
+
+<!-- browse mode: grid of covers, scroll down for more -->
+<div class="book-browse" id="bookBrowse">
+  <div class="book-track" id="bookTrack"><!-- covers injected by JS --></div>
+</div>
+
+<!-- detail mode: cover left, review right -->
+<div class="book-detail" id="bookDetail">
+  <button class="book-back" id="bookBack">&#8592; back to all books</button>
+  <div class="book-detail-inner">
+    <div class="book-detail-cover" id="bookDetailCover"></div>
+    <div class="book-detail-text">
+      <div class="entry-meta" id="bookDetailMeta"></div>
+      <h3 class="entry-title" id="bookDetailTitle"></h3>
+      <div class="stars" id="bookDetailStars"></div>
+      <p id="bookDetailReview"></p>
+      <div class="tag-row" id="bookDetailTags"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const books = [
+    {
+      title: "The Kybalion",
+      author: "The Three Initiates",
+      rating: 5,
+      review: " The story of how I got this book is pretty interesting. It was the summer of 2025, I was walking a dog named nipsey and he decided to take a piss on an old man's lawn. The old man came out thinking the dog went #2 on his grass, but was rather chill after he seen that wasn't the case. He started talking to me about the universe, quoting different types of phrases and metaphors. 'Wait here' he said 'I got a book for you'. I waited and he came out with The Kybalion, a book I have never seen or heard of before. At a time where I was losing connections with old friends, struggling to understand what was happening in my life. Reading this book made everything click. Although I never heard of this book before, it was like I already knew the material that was written in it. Shi crazy. Great book though, and honestly essential if you wanna get a better understanding of how the world/universe works.",
+      tags: ["esoteric"],
+      coverColor: "var(--purple)",
+      image: "https://i.ibb.co/s95Bz0xR/kybalion-book-page.webp"
+    },
+    {
+      title: "The Power of Now",
+      author: "Eckhart Tolle",
+      rating: 4,
+      review: "I usually find new books to read either through people giving them to me, or from watching videos on YouTube about certain subjects that use a book as their reference. I got this book according to the latter, watching a YouTuber named 'Pauly Walnuts'. I thought this book was pretty good, it introduced me to some new concepts I have never heard of before. It helped me be a lot more mindful of my time allocation, and what I was giving my attention to in my daily life. We as human beings (assuming you are one as well) can only live in the present moment, the here and now. You can think about the future and the past all you want, but you will still be living in the NOW. So focus on what you can do NOW to get where you go, or what you wish to achieve.",
+      tags: ["Self-Help"],
+      coverColor: "var(--gold)",
+      image: "https://i.ibb.co/rGHh5vfM/power-of-now.jpg"
+    },
+    {
+      title: "The Hermetica",
+      author: "Freke and Gandy",
+      rating: 4,
+      review: "Remember the old man I mentioned in my first entry? (See Kybalion for more info) He also gifted me this banger. This one goes more into depth of what 'The Kybalion' started, it has more of a flow to it and lays out stories and information cleanly for anyone to understand. It talks about our purpose as humans, what we're here for and why we came to be in the first place. I need to read it again to give you a proper synopsis but know that this one is also goated.",
+      tags: ["Esoteric"],
+      coverColor: "var(--cyan)",
+      image: "https://i.ibb.co/jZTFkXM2/the-hermetica.jpg" 
+    },
+    {
+      title: "The Four Agreements",
+      author: "Don Miguel Ruiz",
+      rating: 5,
+      review: "My sister Shauna gave me this book years ago, so long ago that I don't remember exactly when. It sat on the head of my bed for years as I scrolled my time and energy away on my phone, oblivious to the knowledge I kept in close proximity. It wasn't until 2025 (The year of change for me) that I woke up and sat down to read through the book. My decision to make reading a habit stemmed from this experience, after finishing this one I was eager to read anything I could get my hands on. I love short, simple books that are packed with wisdom, and this one had it all. 4 agreements to keep in mind as you live your life, in order to cultivate an existence that is honorable, righteous, and fulfilling.",
+      tags: ["Self-Help"],
+      coverColor: "var(--cyan)",
+      image: "https://i.ibb.co/WvvDx6Hx/thefouragreements.webp"
+    },
+    {
+      title: "The Tao: The way of life according to Lao Tzu",
+      author: "Lao Tzu",
+      rating: 5,
+      review: "I got this book in Snell library at Northeastern, whenever I go to see what books they have I always go to the 'Religion/Philosophy' section. I chose this book because it was small enough to fit inside the pocket of my jeans. Out of all the different ways of thinking this world offers, I most resonate with the Tao. Although I wasn't aware of the term 'Tao' before reading these poems, I knew the concept very well through my own experiences. If you know of the Tao, then you know that it cannot be explained or put into words, it just is and always will be. After reading this I bought my own copy to have in my personal collection so I can go back to it whenever I need. It's one of those books you can finish in a day.",
+      tags: ["Philosophy"],
+      coverColor: "var(--cyan)",
+      image:"https://i.ibb.co/vCxC710b/the-tao.jpg"
+    },
+    {
+      title: "Anthem",
+      author: "Ayn Rand",
+      rating: 4,
+      review: "I took this book from my older brother's library because I didn't have anything to read at that time. As of right now I tend to stay away from fiction, just because I want to know of REAL things. But fiction books like this one paint a picture of reality through imaginary means. This book is set in a time where power over resources, education, and food are in the hands of the few. The people are told who they shall be and how they should conduct their lives according to those who are in power. While everyone is mindlessly accepting the fate that has been chosen for them. One man cannot shake the rebellious feelling in his being, and makes it his mission to uncover the truth of the world that he was born into. ",
+      tags: ["Fiction"],
+      coverColor: "var(--cyan)",
+      image: "https://i.ibb.co/DgshtK6w/anthym.jpg"
+    },
+    {
+      title: "A Random Walk Down Wall Street",
+      author: "Burton G. Malkiel",
+      rating: 3,
+      review: "I received this book as a Christmas gift from my older sister. I'm not gonna waste your time so ima tell you my honest opinion. THIS BOOK IS BORING. If you are not interested in finance (although you should be) you will find this book extremely hard to get through without falling asleep. I couldn't bring myself to finish the last 50 pages, but I got what I needed out of it. If you can get past the boring, but important financial history sections. This book can provide you with a lot of useful information about money and how it works, as well as tables of strong investments to look into. ",
+      tags: ["Finance"],
+      coverColor: "var(--purple)",
+      image:"https://i.ibb.co/vxddsDzN/wallstreet.jpg"
+    },
+    {
+      title: "When Breath Becomes Air",
+      author: "Paul Kalanithi",
+      rating: 4,
+      review: "I received this book from a girl who I think is my ex? I'm not too sure where we stand/stood but she was cool and I do miss her at times. This book is about a high achieving surgeon who always wanted to better understand what death was, hence why he chose a profession that dances with it on the regular. After climbing the ranks in his work and garnering respect from all over the world, he is hit with a terminal illness. In the time from when he was diagnosed, to his eventual death, he wrote this book explaining his life story, battles with the illness and his methods for coping with his inevitable reality. I thought this book very eye opening and introspective, and it sort of planted the seed in my mind to start writing. ",
+      tags: ["Memoir"],
+      coverColor: "var(--gold)",
+      image: " https://i.ibb.co/Z9JXwCg/when-breathe-becomes-air.jpg"
+    },
+    {
+      title: "The Last Lecture",
+      author: "Randy Pausch",
+      rating: 4,
+      review: "I remember seeing a video on YouTube with the same title as this book, and it showed the author Randy Pausch in the thumbnail. I forgot how I figured out that he wrote a book on this event, but once I did I bought it immediately to read about it. Like 'When Breath Becomes Air' Randy also wrote his book while diagnosed with a terminal disease. He talks about the method of being a good person to those around you, and how you can bring out the best in people, while bringing out the best qualities in yourself. One subject that stuck with me was 'Enabling the dreams of others'. I interpret this as helping those who have a vision of what they want.",
+      tags: ["Memoir"],
+      coverColor: "var(--cyan)",
+      image: "https://i.ibb.co/8Db56QDD/the-last-lecture.jpg"
+    },
+    {
+      title: "Thick Face, Black Heart",
+      author: "Chin-Ning Chu",
+      rating: 5,
+      review: "This is also one of the many books that was given to me by the old man, and it's probably gonna go down as one of my favorite books of all time. Like 'The Kybalion' I resonated with a lot of the material this book had to offer. It walks you through strategies of how to conduct your life, and what to expect from others when you are on your path towards success. This is also a book I had to buy separately to keep. I highly recommended it for everyone.  ",
+      tags: ["Self-Help"],
+      coverColor: "var(--purple)",
+      image: "https://i.ibb.co/9kpFY4HS/tfbh.webp"
+    },
+    {
+      title: "The Quest for Mary Magdalene",
+      author: "Michael Haag",
+      rating: 4,
+      review: "This was also a book I checked out of Snell Library, I picked it up because I've heard the name Mary Magdalene before but never really knew too much about her. This book goes into why she was damn near edited out of history, as well her role as Jesus's wife/apostle. It was a pretty good book, it re-taught me the great story from a new perspective and why certain ideologies are more accepted than others.",
+      tags: ["History"],
+      coverColor: "var(--gold)",
+      image: "https://i.ibb.co/qF3p4yPq/mary.jpg"
+
+    },
+    {
+      title: "The Sayings of Confucius",
+      author: "Confucius",
+      rating: 5,
+      review: "This is also a Snell library banger. Just like the Tao this book fit nicely in my pockets, and was really fun to pick up and read. Confucius is just a great guy man, wanting everyone to better themselves for the greater good of society. His maxims and phrases are still applicable in today's climate and this book can act as a guide on how to maneuver through life.",
+      tags: ["Philosophy"],
+      coverColor: "var(--cyan)",
+      image:"https://i.ibb.co/Nn645jcf/confucs.jpg"
+    },
+    {
+      title: "Bhagavad Gita",
+      author: "Vyasa (trad.)",
+      rating: 5,
+      review: "My goodness this yet ANOTHER Snell banger. This is a tale as old as time, Arjuna is conflicted with going to war with his own kin, and is reminded of his true nature as a warrior by Krishna. This is a book that I would want to read multiple different translations of, to make sure I really understand the story. I also find the story of how this book came to be very interesting.",
+      coverColor: "var(--purple)",
+      image:"https://i.ibb.co/Xk5xMXCZ/gita.jpg"
+    },
+    {
+      title: "The Poisoned Arrow",
+      author: "Don Miguel Ruiz Jr.",
+      rating: 4,
+      review: "This book was written by the son of 'The 4 Agreements'. Its main premise is about fear, what it really is and how it can prevent you from living a life that is truly yours. Fear can seep into what you think, your choices, and the words you speak out loud to others. Recognizing and eliminating where fear lies in any aspect of your life is mandatory. No if ands or buts.", 
+      coverColor: "var(--gold)",
+      image:"https://i.ibb.co/TMLKNFPW/the-one.jpg"
+    },
+    {
+      title: "The Tao Is Silent",
+      author: "Raymond Smullyan",
+      rating: 5,
+      review: "This is also going down as one of my favorite books of all time, Raymond Smullyan is an amazing author. This book was comedic at times, but also very informational. If you don't know much about the Tao, this is a great place to start. His styling of writing is very welcoming, and can cater to anyone regardless of what background you come from. This was also found in Snell, and I might just buy my own copy after I'm done writing this. ",
+      tags: ["Philosophy"],
+      coverColor: "var(--cyan)",
+      image:"https://i.ibb.co/60mngvyv/silent.jpg"
+    },
+    {
+      title: "The Hidden Messages in Water",
+      author: "Masaru Emoto",
+      rating: 4.5,
+      review: "I bought this book after I saw it being used as research in a YouTube video I was watching. I wanted to know more about the source so I read it myself. It was a pretty quick read and featured beautiful photographs of crystals. Masaru talks about the many uses and properties of water, and how it is affected vibrationally through our thoughts, words, and actions. It was an excellent read and helped me to be more conscious of the thoughts I give energy to.",
+      tags: ["Spirituality"],
+      coverColor: "var(--purple)",
+      image:"https://i.ibb.co/7JtxtZ7X/water2.webp"
+    },
+    {
+      title: "Thus Spoke Zarathustra",
+      author: "Friedrich Nietzsche",
+      rating: 4.5,
+      review: "I heard of Nietzsche before reading this book, and I knew that his work is pretty renowned amongst the many, so when I seen this title at the library I said 'Why not' and dove in. The story is about a sage who lives in the mountains descending among the common folk to tell them of a realization he came to while in isolation, that god is dead. Met with scrutiny, he travels the land to search for like minded people to teach. I like the idea that we are god in human form, it puts the power back into your life imo. It took me a good 4 or 5 months to finish this book. There were times where it felt like the progress was moving pretty slow but it was worth it. There's some banger quotes in this book, I would put one here but I'm lazy. I'd rather you read it and find them yourself.",
+      tags: ["Philosophy"],
+      coverColor: "var(--gold)",
+      image:"https://i.ibb.co/2YqXhpyQ/spoke.jpg"
+    },
+    {
+      title: "The Righteous Way: Infinity Edition",
+      author: "Starmel Allah",
+      rating: 5,
+      review: "This is the third and final installment of Starmel's 'The Righteous Way' books. I wish I was given the previous two before reading this one but I'm glad I read it nonetheless. This text introduced me to the 5 percenters and their teachings, all of which I find very interesting and continue to explore currently. 'The Righteous Way: Infinity Edition' is a relatable, introspective piece that encourages you to know thy self, and to come to the realization that you are infinite. There is no limit to what you can do. Starmel Allah is also a very good writer.",
+      tags: ["Philosophy"] ["Self-Help"],
+      coverColor: "var(--cyan)",
+      image:"https://i.ibb.co/Z1khV1yF/allah.jpg"
+    },
+    {
+      title: "The Simulated Leviathan",
+      author: "Rory O'Keefe",
+      rating: 4.5,
+      review: "I found this book through a YouTuber with the same name as the title. His videos are very entertaining while sprinkling little truth bombs about the world we live in. 'The Simulated Leviathan' talks about where we are heading when it comes to AI integration in our daily lives. As well as how it will be used to usher in a new world order through fear, confusion and the unknown.",
+      tags: ["Philosophy", "Technology"],
+      coverColor: "var(--purple)",
+      image:"https://i.ibb.co/mrbK6zvT/yup.jpg"
+    },
+    {
+      title: "Knowledge of Self",
+      author: "Supreme Understanding Allah, et al. (foreword by Lord Jamar)",
+      rating: 5,
+      review: "This book is made up of numerous personal essays from people within the 5% nation. Everyone tells their stories of how they came to the knowledge of themselves and what it means to build upon that foundation. This book puts emphasis on community and passing on righteous knowledge to the youth. I learned a lot through this book, and became more curious after the fact.",
+      tags: ["Philosophy"],
+      coverColor: "var(--gold)",
+      image:"https://i.ibb.co/qZGWpSF/self-2.jpg"
+    },
+
+  ];
+
+  const track = document.getElementById('bookTrack');
+  const browse = document.getElementById('bookBrowse');
+  const detail = document.getElementById('bookDetail');
+  const backBtn = document.getElementById('bookBack');
+
+  const detailCover = document.getElementById('bookDetailCover');
+  const detailMeta = document.getElementById('bookDetailMeta');
+  const detailTitle = document.getElementById('bookDetailTitle');
+  const detailStars = document.getElementById('bookDetailStars');
+  const detailReview = document.getElementById('bookDetailReview');
+  const detailTags = document.getElementById('bookDetailTags');
+
+  function starString(n) {
+    return '&#9733;'.repeat(n) + '&#9734;'.repeat(5 - n);
+  }
+
+  function coverHTML(book) {
+    if (book.image) {
+      return `<div class="book-cover-art has-image"><img src="${book.image}" alt="${book.title} cover"></div>`;
+    }
+    return `<div class="book-cover-art" style="background: linear-gradient(160deg, ${book.coverColor}, #000);">
+      <span class="book-cover-title">${book.title}</span>
+      <span class="book-cover-author">${book.author}</span>
+    </div>`;
+  }
+
+  books.forEach((book, i) => {
+    const cover = document.createElement('div');
+    cover.className = 'book-cover';
+    cover.innerHTML = coverHTML(book);
+    cover.addEventListener('click', () => openDetail(i));
+    track.appendChild(cover);
+  });
+
+  function openDetail(i) {
+    const book = books[i];
+    detailCover.innerHTML = coverHTML(book);
+    detailMeta.textContent = book.finished || '';
+    detailTitle.textContent = `${book.title} — ${book.author}`;
+    detailStars.innerHTML = starString(book.rating);
+    detailReview.textContent = book.review;
+    detailTags.innerHTML = (book.tags || []).map(t => `<span class="tag">${t}</span>`).join('');
+
+    browse.style.display = 'none';
+    detail.classList.add('active');
+  }
+
+  function closeDetail() {
+    detail.classList.remove('active');
+    browse.style.display = 'block';
+  }
+
+  backBtn.addEventListener('click', closeDetail);
+</script>
+  </div>
+
+</div>
+</div>
+<!--end of main box!-->
+
+<div class="site-footer">&copy; 2026 GRiM.COM </div>
+
+</div>
+  </body>
+</html>
